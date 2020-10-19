@@ -1,0 +1,31 @@
+{
+  "name": "bth-js-back",
+  "version": "1.0.0",
+  "description": "Backend for the jsframework project at BTH",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev-start": "NODE_ENV='development' nodemon app.js",
+    "production": "NODE_ENV='production' node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slistrom/bth-js-back.git"
+  },
+  "author": "Stefan Liström",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slistrom/bth-js-back/issues"
+  },
+  "homepage": "https://github.com/slistrom/bth-js-back#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "sqlite3": "^5.0.0"
+  }
+}
