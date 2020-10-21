@@ -3,5 +3,3 @@ CREATE TABLE IF NOT EXISTS users (
     password VARCHAR(60) NOT NULL,
     UNIQUE(email)
 );
-
-INSERT INTO users (email, password) VALUES ("test", "test");
