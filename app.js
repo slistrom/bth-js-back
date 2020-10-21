@@ -5,11 +5,12 @@ const morgan = require('morgan');
 
 const app = express();
 const port = 1339;
-require('dotenv').config();
 
 const index = require('./routes/index');
 const register = require('./routes/register');
 const login = require('./routes/login');
+
+require('dotenv').config();
 
 app.use(cors());
 
@@ -33,6 +34,7 @@ app.use('/login/', login);
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
     var err = new Error("Not Found");
+
     err.status = 404;
     next(err);
 });
