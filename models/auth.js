@@ -87,6 +87,13 @@ const auth = {
                 }
             });
         }
+        db.run("INSERT INTO depot (email, value) VALUES (?, ?)",
+            email,
+            0, (err) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
         bcrypt.hash(password, 10, function(err, hash) {
             db.run("INSERT INTO users (email, password) VALUES (?, ?)",
                 email,
@@ -100,6 +107,22 @@ const auth = {
                         }
                     });
                 });
+        });
+    },
+
+    checkToken: function (req, res, next) {
+        const token = req.headers['x-access-token'];
+
+        jwt.verify(token, jwtSecret, function(err, decoded) {
+            if (err) {
+                return res.status(401).json({
+                    data: {
+                        message: "No valid token."
+                    }
+                });
+            }
+            // Valid token send on the request
+            next();
         });
     }
 };

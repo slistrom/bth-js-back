@@ -6,11 +6,12 @@ const morgan = require('morgan');
 const app = express();
 const port = 1339;
 
+require('dotenv').config();
+
 const index = require('./routes/index');
 const register = require('./routes/register');
 const login = require('./routes/login');
-
-require('dotenv').config();
+const account = require('./routes/account');
 
 app.use(cors());
 
@@ -30,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', index);
 app.use('/register/', register);
 app.use('/login/', login);
+app.use('/account/', account);
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
