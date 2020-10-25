@@ -8,12 +8,44 @@ const port = 1339;
 
 require('dotenv').config();
 
+// var http = require('http').Server(app);
+// const io = require('socket.io')(http);
+const stock = require("./models/stock.js");
+
 const index = require('./routes/index');
 const register = require('./routes/register');
 const login = require('./routes/login');
 const account = require('./routes/account');
 
+
+var amethyst = {
+    name: "Amethyst",
+    rate: 1.002,
+    variance: 0.6,
+    startingPoint: 20,
+};
+
+var rosequartz = {
+    name: "Rosequartz",
+    rate: 1.001,
+    variance: 0.4,
+    startingPoint: 20,
+};
+
+var selenite = {
+    name: "Selenite",
+    rate: 1.003,
+    variance: 0.2,
+    startingPoint: 20,
+};
+
+var crystals = [amethyst, rosequartz, selenite];
+
 app.use(cors());
+
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+io.origins(['https://trading.listrom.me:443','http://localhost:3000']);
 
 // don't show the log when it is test
 if (process.env.NODE_ENV !== 'development') {
@@ -64,6 +96,26 @@ app.use((err, req, res, next) => {
 //     );
 // }
 
-const server = app.listen(port, () => console.log(`Backend API listening on port ${port}!`));
+io.on('connection', function(socket) {
+    console.log('a user connected');
+    socket.on('disconnect', function() {
+        console.log('user disconnected');
+    });
+});
+
+setInterval(function () {
+    crystals.map((crystal) => {
+        crystal["startingPoint"] = stock.getStockPrice(crystal);
+        return crystal;
+    });
+
+    // console.log(cakes);
+
+    io.emit("stocks", crystals);
+}, 5000);
+
+// const server = app.listen(port, () => console.log(`Backend API listening on port ${port}!`));
+server.listen(port, () => console.log(`Backend API listening on port ${port}!`));
 
 module.exports = server;
+

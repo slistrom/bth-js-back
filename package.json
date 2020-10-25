@@ -6,7 +6,6 @@
   "scripts": {
     "pretest": "bash db/reset_test_db.bash",
     "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --timeout 10000",
-    "posttest": "npm run eslint",
     "start": "node app.js",
     "dev-start": "NODE_ENV='development' nodemon app.js",
     "production": "NODE_ENV='production' node app.js",
@@ -30,6 +29,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
+    "socket.io": "^2.3.0",
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {

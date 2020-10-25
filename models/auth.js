@@ -113,7 +113,8 @@ const auth = {
     checkToken: function (req, res, next) {
         const token = req.headers['x-access-token'];
 
-        jwt.verify(token, jwtSecret, function(err, decoded) {
+        // jwt.verify(token, jwtSecret, function(err, decoded) {
+        jwt.verify(token, jwtSecret, function(err) {
             if (err) {
                 return res.status(401).json({
                     data: {
