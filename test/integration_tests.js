@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'development';
+process.env.NODE_ENV = 'test';
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -42,8 +42,6 @@ describe('Login', () => {
     });
 });
 
-
-
 describe('Register', () => {
     describe('GET /register', () => {
         it('200 HAPPY PATH', (done) => {
@@ -58,5 +56,3 @@ describe('Register', () => {
         });
     });
 });
-
-

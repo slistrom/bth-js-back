@@ -106,16 +106,18 @@ io.on('connection', function(socket) {
     });
 });
 
-setInterval(function () {
-    crystals.map((crystal) => {
-        crystal["startingPoint"] = stock.getStockPrice(crystal);
-        return crystal;
-    });
+if (process.env.NODE_ENV !== 'test') {
+    setInterval(function () {
+        crystals.map((crystal) => {
+            crystal["startingPoint"] = stock.getStockPrice(crystal);
+            return crystal;
+        });
 
-    // console.log(cakes);
+        // console.log(cakes);
 
-    io.emit("stocks", crystals);
-}, 5000);
+        io.emit("stocks", crystals);
+    }, 5000);
+}
 
 // const server = app.listen(port, () => console.log(`Backend API listening on port ${port}!`));
 server.listen(port, () => console.log(`Backend API listening on port ${port}!`));
