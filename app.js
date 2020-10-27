@@ -16,26 +16,27 @@ const index = require('./routes/index');
 const register = require('./routes/register');
 const login = require('./routes/login');
 const account = require('./routes/account');
+const trading = require('./routes/trading');
 
 
 var amethyst = {
     name: "Amethyst",
-    rate: 1.002,
-    variance: 0.6,
+    rate: 1.00002,
+    variance: 0.3,
     startingPoint: 20,
 };
 
 var rosequartz = {
     name: "Rosequartz",
-    rate: 1.001,
-    variance: 0.4,
+    rate: 1.00001,
+    variance: 0.2,
     startingPoint: 20,
 };
 
 var selenite = {
     name: "Selenite",
-    rate: 1.003,
-    variance: 0.2,
+    rate: 1.00003,
+    variance: 0.1,
     startingPoint: 20,
 };
 
@@ -45,7 +46,8 @@ app.use(cors());
 
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-io.origins(['https://trading.listrom.me:443','http://localhost:3000']);
+
+io.origins(['https://trading.listrom.me:443', 'http://localhost:3000']);
 
 // don't show the log when it is test
 if (process.env.NODE_ENV !== 'development') {
@@ -64,6 +66,7 @@ app.use('/', index);
 app.use('/register/', register);
 app.use('/login/', login);
 app.use('/account/', account);
+app.use('/trading/', trading);
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
